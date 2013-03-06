@@ -35,7 +35,7 @@ import com.semsaas.jsonxml.examples.Examples;
 public class Tests {
 	
 	@Test
-	public void test() {
+	public void json2xjson() {
 		InputStream is = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.json");
 		try {
 			// The real test
@@ -54,6 +54,28 @@ public class Tests {
 		} catch (SAXException e) {
 			fail(e.getMessage());
 		} catch (TransformerException e) {
+			fail(e.getMessage());
+		} catch (IOException e) {
+			fail(e.getMessage());
+		}
+	}
+	
+	@Test
+	public void xjson2json() {
+		InputStream is = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.xml");
+		try {
+			// The real test
+			StringWriter result = new StringWriter();
+			Examples.XJson2json.xjson2json(is, result);
+			
+			// Check the results			
+			StringWriter expected = new StringWriter();
+			InputStream xmlIs = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.json");
+			IOUtils.copy(xmlIs, expected);
+			
+			assertEquals(expected.toString().replaceAll("[\\n\\s]+", ""),result.toString().replaceAll("[\\n\\s]+", ""));
+			
+		} catch (SAXException e) {
 			fail(e.getMessage());
 		} catch (IOException e) {
 			fail(e.getMessage());

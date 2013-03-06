@@ -35,30 +35,22 @@ import org.xml.sax.helpers.AttributesImpl;
 import org.xml.sax.helpers.DefaultHandler;
 
 public class JsonXMLReader implements XMLReader {
-	public final static String XJSON_URI = "http://www.objectml.org/ns/data/xjson";
-	
 	ContentHandler contentHandler;
 	DTDHandler dtdHandler;
 	EntityResolver entityResolver;
 	ErrorHandler errorHandler;
 	
-	private String targetNamespace		= XJSON_URI;
+	private String targetNamespace		= XJSON.XMLNS;
 	private String targetPrefix			= null;
 
-	private String objectLocalName		= "object";
-	private String arrayLocalName		= "array";
-	private String valueLocalName		= "value";
-	private String nameAttrLocalName	= "name";
+	private String objectQName			= XJSON.objectLocalName; 
+	private String arrayQName			= XJSON.arrayLocalName;	
+	private String valueQName			= XJSON.valueLocalName;
 
-	private String objectQName			= objectLocalName; 
-	private String arrayQName			= arrayLocalName;	
-	private String valueQName			= valueLocalName;
-
-	private String nameAttrQName		= nameAttrLocalName;
-	
+	private String nameAttrQName		= XJSON.nameAttrLocalName;
 	
 	public JsonXMLReader() {
-		targetNamespace = XJSON_URI;
+		targetNamespace = XJSON.XMLNS;
 		
 		DefaultHandler handler = new DefaultHandler();
 		contentHandler = handler;
@@ -74,11 +66,11 @@ public class JsonXMLReader implements XMLReader {
 	public void setTargetPrefix(String prefix) {
 		targetPrefix = prefix;
 		if(targetPrefix != null) {
-			objectQName = targetPrefix + ":" + objectLocalName;
-			arrayQName = targetPrefix + ":" + arrayLocalName;
+			objectQName = targetPrefix + ":" + XJSON.objectLocalName;
+			arrayQName = targetPrefix + ":" + XJSON.arrayLocalName;
 		} else {
-			objectQName = objectLocalName;
-			arrayQName = arrayLocalName;
+			objectQName = XJSON.objectLocalName;
+			arrayQName = XJSON.arrayLocalName;
 		}
 	}
 	
@@ -147,18 +139,18 @@ public class JsonXMLReader implements XMLReader {
 			AttributesImpl atts = new AttributesImpl();
 			while (curTok != null) {
 				if(curTok == JsonToken.START_OBJECT) {
-					contentHandler.startElement(targetNamespace, objectLocalName, objectQName, atts);
+					contentHandler.startElement(targetNamespace, XJSON.objectLocalName, objectQName, atts);
 					atts = new AttributesImpl();
 				} else if(curTok == JsonToken.START_ARRAY) {
-					contentHandler.startElement(targetNamespace, arrayLocalName, arrayQName, atts);
+					contentHandler.startElement(targetNamespace, XJSON.arrayLocalName, arrayQName, atts);
 					atts = new AttributesImpl();
 				} else if(curTok == JsonToken.END_OBJECT) {
-					contentHandler.endElement(targetNamespace, objectLocalName, objectQName);
+					contentHandler.endElement(targetNamespace, XJSON.objectLocalName, objectQName);
 				} else if (curTok == JsonToken.END_ARRAY) {
-					contentHandler.endElement(targetNamespace, arrayLocalName, arrayQName);
+					contentHandler.endElement(targetNamespace, XJSON.arrayLocalName, arrayQName);
 				} else if(curTok == JsonToken.FIELD_NAME) {
 					atts = new AttributesImpl();
-					atts.addAttribute(null, nameAttrLocalName, nameAttrQName, "CDATA", jp.getCurrentName());
+					atts.addAttribute(null, XJSON.nameAttrLocalName, nameAttrQName, "CDATA", jp.getCurrentName());
 				} else {
 					String characters = null;
 					if(curTok == JsonToken.VALUE_STRING) {
@@ -173,12 +165,12 @@ public class JsonXMLReader implements XMLReader {
 						characters = "true";
 					}
 				
-					contentHandler.startElement(targetNamespace, valueLocalName, valueQName, atts);
+					contentHandler.startElement(targetNamespace, XJSON.valueLocalName, valueQName, atts);
 					atts = new AttributesImpl();
 					if(characters != null) {
 						contentHandler.characters(characters.toCharArray(), 0, characters.length());
 					}
-					contentHandler.endElement(targetNamespace, valueLocalName, valueQName);
+					contentHandler.endElement(targetNamespace, XJSON.valueLocalName, valueQName);
 				}
 				curTok = jp.nextToken();
 				
