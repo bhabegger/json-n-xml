@@ -1,0 +1,14 @@
+{
+  "firstname": "Benjamin",
+  "lastname": "Habegger",
+  "children": [
+    {
+       "firstname": "Alex",
+       "lastname": "Habegger"
+    },
+    {
+       "firstname":  "Margot",
+       "lastname": "Habegger"
+    }
+  ]
+}
