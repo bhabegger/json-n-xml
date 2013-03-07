@@ -48,15 +48,15 @@ json-n-xml transforms it to the following xjson:
 
 And now you can you those tons of tools around XML, like XPath and XSLT, to process your data.
 
-For example, using the previous documents:
+For example, using the previous documents (with the j prefix mapped to 'http://www.objectml.org/ns/data/xjson'):
 
 * Get the "features" using the XPath expression
 
-        //object/array[@name='features']
+        //j:object/j:array[@name='features']
 
 * Get the "firstname"s of the "authors" using the XPath expression
 
-        //object/array[@name='authors']/object/value[@name='firstname']
+        //j:object/j:array[@name='authors']/j:object/j:value[@name='firstname']
 
 Isn't that awesome ? You now can do XPath on JSON data !!
  

@@ -24,6 +24,9 @@ import org.xml.sax.helpers.NamespaceSupport;
  *     <object>
  *       <value name="firstname">Alex</value>
  *     </object>
+ *     <object>
+ *       <value name="firstname">Margot</value>
+ *     </object>
  *   </array>
  * </object>
  * 

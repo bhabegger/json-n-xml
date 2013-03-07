@@ -1,0 +1,8 @@
+USAGE:
+
+java com.semsaas.jsonxml.tools.XPath [-h] [-e <xpath>]* [<json file>]*
+
+Options:
+ -h     Obtain this help message
+ -e     Add an Xpath expression to be evaluated
+ 
