@@ -27,23 +27,23 @@ Take this JSON document
 
 json-n-xml transforms it to the following xjson:
 
-   <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-   <object xmlns="http://www.objectml.org/ns/data/xjson">
-     <value name="name">json-n-xml</value>
-     <value name="description">A cool JSON to XML and back library</value>
-     <array name="features">
-        <value>Transform a json stream into an xjson XML stream</value>
-        <value>Transform an xjson stream back to JSON</value>
-     </array>
-     <array name="authors">
-        <object>
-           <value name="firstname">Benjamin</value>
-           <value name="lastname">Habegger</value>
-           <value name="github">bhabegger</value>
-           <value name="twitter">@bhabegger</value>
-        </object>
-     </array>
-   </object>
+    <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+    <object xmlns="http://www.objectml.org/ns/data/xjson">
+      <value name="name">json-n-xml</value>
+      <value name="description">A cool JSON to XML and back library</value>
+      <array name="features">
+         <value>Transform a json stream into an xjson XML stream</value>
+         <value>Transform an xjson stream back to JSON</value>
+      </array>
+      <array name="authors">
+         <object>
+            <value name="firstname">Benjamin</value>
+            <value name="lastname">Habegger</value>
+            <value name="github">bhabegger</value>
+            <value name="twitter">@bhabegger</value>
+         </object>
+      </array>
+    </object>
 
 
 And now you can you those tons of tools around XML, like XPath and XSLT, to process your data.
