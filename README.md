@@ -51,10 +51,12 @@ And now you can you those tons of tools around XML, like XPath and XSLT, to proc
 For example, using the previous documents:
 
 * Get the "features" using the XPath expression
-   //object/array[@name='features']
+
+        //object/array[@name='features']
 
 * Get the "firstname"s of the "authors" using the XPath expression
-   //object/array[@name='authors']/object/value[@name='firstname']
+
+        //object/array[@name='authors']/object/value[@name='firstname']
 
 Isn't that awesome ? You now can do XPath on JSON data !!
  
