@@ -1,0 +1,16 @@
+{
+    "name": "json-n-xml",
+    "description": "A cool JSON to XML and back library",
+    "features": [
+        "Transform a json stream into an xjson XML stream",
+        "Transform an xjson stream back to JSON"
+    ],
+    "authors": [
+       {
+          "firstname": "Benjamin",
+          "lastname": "Habegger",
+          "github": "bhabegger",
+          "twitter": "@bhabegger"
+       }
+    ]
+}

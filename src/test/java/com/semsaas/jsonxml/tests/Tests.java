@@ -35,8 +35,27 @@ import com.semsaas.jsonxml.examples.Examples;
 public class Tests {
 	
 	@Test
-	public void json2xjson() {
-		InputStream is = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.json");
+	public void test001_json2xjson() {
+		json2xjson("com/semsaas/jsonxml/tests/test001.json","com/semsaas/jsonxml/tests/test001.xml");
+	}
+	
+	@Test 
+	public void test001_xjson2json() {
+		xjson2json("com/semsaas/jsonxml/tests/test001.xml", "com/semsaas/jsonxml/tests/test001.json");
+	}
+	
+	@Test
+	public void test002_json2xjson() {
+		json2xjson("com/semsaas/jsonxml/tests/test002.json","com/semsaas/jsonxml/tests/test002.xml");
+	}
+	
+	@Test 
+	public void test002_xjson2json() {
+		xjson2json("com/semsaas/jsonxml/tests/test002.xml", "com/semsaas/jsonxml/tests/test002.json");
+	}	
+	
+	public void json2xjson(String jsonResource, String xmlResource) {
+		InputStream is = ClassLoader.getSystemResourceAsStream(jsonResource);
 		try {
 			// The real test
 			Node node = Examples.Json2Dom.json2dom(is);
@@ -46,10 +65,10 @@ public class Tests {
 			Examples.serialize(node, result);
 			
 			StringWriter expected = new StringWriter();
-			InputStream xmlIs = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.xml");
+			InputStream xmlIs = ClassLoader.getSystemResourceAsStream(xmlResource);
 			IOUtils.copy(xmlIs, expected);
 			
-			assertEquals(expected.toString(),result.toString());
+			assertEquals(expected.toString().replaceAll("[\\n\\s]+",""),result.toString().replaceAll("[\\n\\s]+",""));
 			
 		} catch (SAXException e) {
 			fail(e.getMessage());
@@ -60,9 +79,8 @@ public class Tests {
 		}
 	}
 	
-	@Test
-	public void xjson2json() {
-		InputStream is = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.xml");
+	public void xjson2json(String xmlResource, String jsonResource) {
+		InputStream is = ClassLoader.getSystemResourceAsStream(xmlResource);
 		try {
 			// The real test
 			StringWriter result = new StringWriter();
@@ -70,7 +88,7 @@ public class Tests {
 			
 			// Check the results			
 			StringWriter expected = new StringWriter();
-			InputStream xmlIs = ClassLoader.getSystemResourceAsStream("com/semsaas/jsonxml/tests/test001.json");
+			InputStream xmlIs = ClassLoader.getSystemResourceAsStream(jsonResource);
 			IOUtils.copy(xmlIs, expected);
 			
 			assertEquals(expected.toString().replaceAll("[\\n\\s]+", ""),result.toString().replaceAll("[\\n\\s]+", ""));
