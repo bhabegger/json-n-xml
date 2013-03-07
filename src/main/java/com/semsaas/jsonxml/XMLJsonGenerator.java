@@ -53,9 +53,11 @@ public class XMLJsonGenerator extends DefaultHandler {
 	
 	public void startDocument() throws SAXException {
 	}
-	
+
+	int depth = 0;
 	public void startElement(String uri, String localName, String qName, Attributes atts) throws SAXException {
 		prefixes.pushContext();
+		depth++;
 		
 		try {
 			if(XJSON.XMLNS.equals(uri)) {
@@ -64,7 +66,7 @@ public class XMLJsonGenerator extends DefaultHandler {
 				
 				// <object>
 				if(XJSON.objectLocalName.equals(localName)) {
-					if(fieldName != null) {
+					if(fieldName != null && depth > 1) {
 						jGenerator.writeObjectFieldStart(fieldName);
 					} else {
 						jGenerator.writeStartObject();
@@ -73,7 +75,7 @@ public class XMLJsonGenerator extends DefaultHandler {
 				
 				// <array>
 				else if(XJSON.arrayLocalName.equals(localName)) {
-					if(fieldName != null) {
+					if(fieldName != null && depth > 1) {
 						jGenerator.writeArrayFieldStart(fieldName);
 					} else {
 						jGenerator.writeStartArray();
@@ -122,7 +124,7 @@ public class XMLJsonGenerator extends DefaultHandler {
 				
 				// </value>
 				else if(XJSON.valueLocalName.equals(localName)) {
-					if(fieldName != null) {
+					if(fieldName != null && depth > 1) {
 						jGenerator.writeStringField(fieldName, currentValue.toString());
 					} else {
 						jGenerator.writeString(currentValue.toString());
@@ -135,6 +137,7 @@ public class XMLJsonGenerator extends DefaultHandler {
 				}
 			}
 			prefixes.popContext();
+			depth--;
 		} catch (JsonGenerationException e) {
 			throw new SAXException(e);
 		} catch (IOException e) {
