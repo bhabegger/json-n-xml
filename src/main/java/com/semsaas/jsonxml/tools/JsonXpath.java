@@ -114,17 +114,14 @@ public class JsonXpath {
 							try {
 								XPath xpath = xpathFactory.newXPath();
 								xpath.setNamespaceContext(new NamespaceContext() {
-									@Override
 									public Iterator getPrefixes(String namespaceURI) {
 										return null;
 									}
 									
-									@Override
 									public String getPrefix(String namespaceURI) {
 										return null;
 									}
 									
-									@Override
 									public String getNamespaceURI(String prefix) {
 										if(prefix==null) {
 											return XJSON.XMLNS;
