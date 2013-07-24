@@ -2,7 +2,7 @@ json-n-xml
 ==========
 
 Never be faced to choosing between JSON or XML... just use what comes at hand and json-n-xml (a bidirectionnal JSON&lt;-&gt;XML SAX-based mapper).
-You'll fin on my blog a short explanation of why I created this library: http://www.habegger.fr/dont-choose-bewteen-json-or-xml/.
+You'll find on on this blog a short explanation of why this library was created and an example of where it can come in handy: http://www.habegger.fr/dont-choose-bewteen-json-or-xml/.
 
 Example
 -------
